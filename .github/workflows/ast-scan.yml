@@ -12,7 +12,7 @@ jobs:
       # Prevent running multiple FoD scans on same release simultaneously
       max-parallel: 1
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check Out Source Code
@@ -28,18 +28,18 @@ jobs:
           # Keystore file name
           keystore-name: release
           
-      - name: Run SAST Scan using ScancentralSAST
-        if: false
-        uses: fortify/github-action@v1.0.0
-        with:
-          sast-scan: true
-        env:
-          SSC_URL: ${{secrets.SSC_URL}}
-          SSC_TOKEN: ${{secrets.SSC_TOKEN}}
-          SSC_APPVERSION: NextJs-ReactNative
-          SC_SAST_TOKEN: ${{secrets.SC_SAST_TOKEN}}
-          SC_SAST_SENSOR_VERSION: 24.2.0
-          DO_EXPORT: true
-          DO_WAIT: true
-          JOB_SUMMARY_ACTION_EXTRA_OPTS: --fs "Security Auditor View"
+      # - name: Run SAST Scan using ScancentralSAST
+      #   if: false
+      #   uses: fortify/github-action@v1.0.0
+      #   with:
+      #     sast-scan: true
+        # env:
+        #   SSC_URL: ${{secrets.SSC_URL}}
+        #   SSC_TOKEN: ${{secrets.SSC_TOKEN}}
+        #   SSC_APPVERSION: NextJs-ReactNative
+        #   SC_SAST_TOKEN: ${{secrets.SC_SAST_TOKEN}}
+        #   SC_SAST_SENSOR_VERSION: 24.2.0
+        #   DO_EXPORT: true
+        #   DO_WAIT: true
+        #   JOB_SUMMARY_ACTION_EXTRA_OPTS: --fs "Security Auditor View"
           
