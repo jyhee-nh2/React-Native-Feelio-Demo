@@ -25,7 +25,7 @@ jobs:
       #   run: ping equal-rabbit-novel.ngrok-free.app
 
       - name: Curl SSC URL
-        run: curl -v https://equal-rabbit-novel.ngrok-free.app/ssc
+        run: curl -v -L https://equal-rabbit-novel.ngrok-free.app/ssc
             
       - name: Run SAST Scan using ScancentralSAST
         if: false
