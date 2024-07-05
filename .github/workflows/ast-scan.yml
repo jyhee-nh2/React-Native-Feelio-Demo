@@ -68,7 +68,7 @@ jobs:
         
       - name: Run SAST Scan using SAST Client
         if: true
-        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 5
+        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 10
 
       - name: Upload Scan Result to SSC
         run: 
