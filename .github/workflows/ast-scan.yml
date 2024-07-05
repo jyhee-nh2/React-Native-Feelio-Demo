@@ -73,7 +73,7 @@ jobs:
       - name: Upload Scan Result to SSC
         run: |
           fcli ssc session login --url ${{vars.SSC_URL}} -t ${{secrets.SSC_TOKEN}}
-          fcli ssc artifact upload --session=default --av="REACT:Feelio" --file="sast.fpr" --progress="simple" 
+          fcli ssc artifact upload --session=default --av="REACT:Feelio" --file="sast.fpr" --progress="simple" --log-level=debug
           fcli ssc session logout --session=default --no-revoke-token
       
       # - name: SC-SAST - Login once
