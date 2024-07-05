@@ -70,11 +70,14 @@ jobs:
         if: true
         run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 10
 
-      - name: Upload Scan Result to SSC
-        run: |
-          fcli ssc session login --url ${{vars.SSC_URL}} -t ${{secrets.SSC_TOKEN}}
-          fcli ssc artifact upload --session=default --av="REACT:Feelio" --file="sast.fpr" --progress="simple" --log-level=DEBUG
-          fcli ssc session logout --session=default --no-revoke-token
+      - name: FCLI Login to SSC
+        run: fcli ssc session login --url ${{vars.SSC_URL}} -t ${{secrets.SSC_TOKEN}}
+
+      - name: FCLI Upload Result to SSC
+        run: fcli ssc artifact upload --session=default --av="REACT:Feelio" --file="sast.fpr" --progress="simple" --log-level=DEBUG
+
+      - name: FCLI Logout from SSC
+        run: fcli ssc session logout --session=default --no-revoke-token
       
       # - name: SC-SAST - Login once
       #   uses: fortify/github-action/internal/sc-sast-login@feat-1.3.0
