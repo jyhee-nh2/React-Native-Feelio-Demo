@@ -14,10 +14,12 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
+    
     env:
       SSC_URL: ${{vars.SSC_URL}}
       SSC_TOKEN: ${{secrets.SSC_TOKEN}}
       SC_SAST_TOKEN: ${{secrets.SC_SAST_TOKEN}}
+      
     steps:
       - name: Check Out Source Code
         uses: actions/checkout@v4
@@ -28,7 +30,9 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
         with:
+          distribution: jdk
           java-version: 17
+          
 
       # - name: Ping SSC server
       #   run: ping equal-rabbit-novel.ngrok-free.app
