@@ -17,7 +17,10 @@ jobs:
     steps:
       - name: Check Out Source Code
         uses: actions/checkout@v4
-          
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+            
       - name: Run SAST Scan using ScancentralSAST
         # if: false
         uses: fortify/github-action@v1.0.0
@@ -26,7 +29,7 @@ jobs:
         env:
           SSC_URL: ${{vars.SSC_URL}}
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}
-          SSC_APPVERSION: NextJs-ReactNative
+          SSC_APPVERSION: NextJs-ReactNative:1.0
           SC_SAST_TOKEN: ${{secrets.SC_SAST_TOKEN}}
           SC_SAST_SENSOR_VERSION: 24.2.0
           DO_EXPORT: true
