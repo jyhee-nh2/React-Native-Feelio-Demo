@@ -56,7 +56,10 @@ jobs:
           # vuln-exporter: v2
           # bugtracker-utility: skip
           # debricked-cli: skip
-
+      
+      - name: Run SAST Client Update
+        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" update
+        
       - name: Run SAST Scan using SAST Client
         if: true
         run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -upload -application "NextJs-ReactNative" -version "1.0" -uptoken ${{secrets.SSC_TOKEN}} -block
