@@ -43,13 +43,17 @@ jobs:
           bugtracker-utility: skip
           debricked-cli: skip
 
-      - name: SC-SAST - Login once
-        uses: fortify/github-action/internal/sc-sast-login@feat-1.3.0
-      - name: SSC - Login once
-        uses: fortify/github-action/internal/ssc-login@feat-1.3.0
+      - name: Run SAST Scan using SAST Client
+        if: false
+        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start
+
+      # - name: SC-SAST - Login once
+      #   uses: fortify/github-action/internal/sc-sast-login@feat-1.3.0
+      # - name: SSC - Login once
+      #   uses: fortify/github-action/internal/ssc-login@feat-1.3.0
             
       - name: Run SAST Scan using ScancentralSAST
-        if: false
+        if: true
         uses: fortify/github-action@v1
         with:
           sast-scan: true
