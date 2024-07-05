@@ -68,7 +68,7 @@ jobs:
         
       - name: Run SAST Scan using SAST Client
         if: true
-        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -upload -application "NextJs-ReactNative" -version "1.0" -uptoken ${{secrets.SSC_TOKEN}} -block
+        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -upload -application "REACT" -version "Feelio" -uptoken ${{secrets.SSC_TOKEN}} -block
 
       # - name: SC-SAST - Login once
       #   uses: fortify/github-action/internal/sc-sast-login@feat-1.3.0
