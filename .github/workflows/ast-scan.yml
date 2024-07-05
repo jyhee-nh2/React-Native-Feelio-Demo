@@ -46,11 +46,17 @@ jobs:
       - name: Run fcli using FCLI_CMD environment variable
         run: ${FCLI_CMD} -V
 
-      - name: Login once
+      - name: SC-SAST - Login once
+        uses: fortify/github-action/internal/sc-sast-login@feat-1.3.0
+      - name: SSC - Login once
         uses: fortify/github-action/internal/ssc-login@feat-1.3.0
-      - name: Login again
+      - name: SC-SAST - Login again
+        uses: fortify/github-action/internal/sc-sast-login@feat-1.3.0
+      - name: SSC - Login again
         uses: fortify/github-action/internal/ssc-login@feat-1.3.0
-      - name: Login once more
+      - name: SC-SAST - Login once more
+        uses: fortify/github-action/internal/sc-sast-login@feat-1.3.0
+      - name: SSC - Login once more
         uses: fortify/github-action/internal/ssc-login@feat-1.3.0
             
       - name: Run SAST Scan using ScancentralSAST
