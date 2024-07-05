@@ -17,6 +17,7 @@ jobs:
     env:
       SSC_URL: ${{vars.SSC_URL}}
       SSC_TOKEN: ${{secrets.SSC_TOKEN}}
+      SC_SAST_TOKEN: ${{secrets.SC_SAST_TOKEN}}
     steps:
       - name: Check Out Source Code
         uses: actions/checkout@v4
