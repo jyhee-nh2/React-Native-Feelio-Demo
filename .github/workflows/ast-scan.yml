@@ -71,7 +71,7 @@ jobs:
         run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 10
 
       - name: Upload Scan Result to SSC
-        run: 
+        run: |
           fcli ssc session login --url ${{vars.SSC_URL}} -t ${{secrets.SSC_TOKEN}}
           fcli ssc artifact upload --av="REACT:Feelio" --file="sast.fpr" --progress="simple"
           fcli ssc session logout
