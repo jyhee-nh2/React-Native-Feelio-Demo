@@ -21,8 +21,8 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.2
 
-      - name: Ping SSC server
-        run: ping equal-rabbit-novel.ngrok-free.app
+      # - name: Ping SSC server
+      #   run: ping equal-rabbit-novel.ngrok-free.app
 
       - name: Curl SSC URL
         run: curl -v https://equal-rabbit-novel.ngrok-free.app/ssc
