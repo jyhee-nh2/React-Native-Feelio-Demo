@@ -32,6 +32,9 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+
+      - name: Verify Java Version
+        run: java --version
           
 
       # - name: Ping SSC server
@@ -44,13 +47,13 @@ jobs:
         uses: fortify/github-action/setup@v1
         with:
           tool-definitions: https://github.com/fortify/tool-definitions/releases/download/v1/tool-definitions.yaml.zip
-          export-path: true
-          fcli: latest
+          # export-path: true
+          # fcli: latest
           sc-client: 24.2.0
-          fod-uploader: latest
-          vuln-exporter: v2
-          bugtracker-utility: skip
-          debricked-cli: skip
+          # fod-uploader: latest
+          # vuln-exporter: v2
+          # bugtracker-utility: skip
+          # debricked-cli: skip
 
       - name: Run SAST Scan using SAST Client
         if: true
