@@ -68,7 +68,7 @@ jobs:
         
       - name: Run SAST Scan using SAST Client
         if: true
-        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" -sscurl "https://equal-rabbit-novel.ngrok-free.app/ssc" -ssctoken ${{secrets.SC_CTRL_TOKEN}} start -upload -application "REACT" -version "Feelio" -uptoken ${{secrets.SSC_TOKEN}} -pool "aea9e0ec-6b85-485b-a855-4d0260267e85" -block --output-file "sast.fpr" -log "sast.log" -pi 10
+        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -upload -application "REACT" -version "Feelio" -uptoken ${{secrets.SSC_TOKEN}} -pool "aea9e0ec-6b85-485b-a855-4d0260267e85" -block --output-file "sast.fpr" -log "sast.log" -pi 10
         # run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 10
 
       # - name: FCLI Login to SSC
