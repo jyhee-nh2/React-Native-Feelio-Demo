@@ -74,7 +74,7 @@ jobs:
         run: fcli ssc session login --url ${{vars.SSC_URL}} -t ${{secrets.SSC_TOKEN}}
 
       - name: FCLI Upload Result to SSC
-        run: fcli ssc artifact upload --session=default --av="REACT:Feelio" --file="sast.fpr" --progress="simple" --log-level=DEBUG
+        run: fcli ssc artifact upload --session=default --av="REACT:Feelio" --file="sast.fpr" --progress="simple" --log-level=DEBUG --log-file=fcli_upload.log
 
       - name: FCLI Logout from SSC
         run: fcli ssc session logout --session=default --no-revoke-token
@@ -98,4 +98,12 @@ jobs:
           DO_EXPORT: true
           DO_WAIT: true
           JOB_SUMMARY_ACTION_EXTRA_OPTS: --fs "Security Auditor View"
+
+      - name: Publish Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4.3.4
+        with:
+          path: fcli_upload.log
+          retention-days: 1
+          overwrite: true
           
