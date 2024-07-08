@@ -64,19 +64,19 @@ jobs:
         run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" update
         
       - name: Run SAST Scan using SAST Client
-        if: true
+        if: false
         run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -upload -application "REACT" -version "Feelio" -uptoken ${{secrets.SSC_TOKEN}} -pool "aea9e0ec-6b85-485b-a855-4d0260267e85" -block --output-file "sast.fpr" -log "sast.log" -pi 10
         # run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 10
             
-      - name: Run SAST Scan using ScancentralSAST
-        if: false
+      - name: Run SAST Scan using Fortify Github Action
+        if: true
         uses: fortify/github-action@v1
         with:
           sast-scan: true
         env:
           SSC_URL: ${{vars.SSC_URL}}
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}
-          SSC_APPVERSION: NextJs-ReactNative:1.0
+          SSC_APPVERSION: REACT:Feelio
           SC_SAST_TOKEN: ${{secrets.SC_SAST_TOKEN}}
           SC_SAST_SENSOR_VERSION: 24.2.0
           DO_EXPORT: true
