@@ -64,12 +64,12 @@ jobs:
         run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" update
         
       - name: Run SAST Scan using SAST Client
-        if: false
-        run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -upload -application "REACT" -version "Feelio" -uptoken ${{secrets.SSC_TOKEN}} -pool "aea9e0ec-6b85-485b-a855-4d0260267e85" -block --output-file "sast.fpr" -log "sast.log" -pi 10
-        # run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 10
+        if: true
+        run: scancentral -url ${{vars.SAST_CTRL_URL}} start -upload -application "REACT" -version "Feelio" -uptoken ${{secrets.SSC_TOKEN}} -pool "aea9e0ec-6b85-485b-a855-4d0260267e85" -block --output-file "sast.fpr" -log "sast.log" -pi 10
+        # run: scancentral -url ${{vars.SAST_CTRL_URL}} start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 10
             
       - name: Run SAST Scan using Fortify Github Action
-        if: true
+        if: false
         uses: fortify/github-action@v1
         with:
           sast-scan: true
@@ -82,6 +82,13 @@ jobs:
           DO_EXPORT: true
           DO_WAIT: true
           JOB_SUMMARY_ACTION_EXTRA_OPTS: --fs "Security Auditor View"
+
+      - name: Export SSC vulnerability data to GitHub
+        uses: fortify/github-action/ssc-export@v1
+        env:
+          SSC_URL: ${{vars.SSC_URL}}
+          SSC_TOKEN: ${{secrets.SSC_TOKEN}}
+          SSC_APPVERSION: REACT:Feelio
 
       - name: Publish Artifacts
         if: always()
