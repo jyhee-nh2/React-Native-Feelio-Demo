@@ -59,9 +59,6 @@ jobs:
       
       - name: Set Client Token for SAST Client
         run: sed -i "s|client_auth_token=.*|client_auth_token=${{secrets.SC_SAST_TOKEN}}|" $SC_CLIENT_INSTALL_DIR/Core/config/client.properties
-
-      - name: Verify auth token
-        run: cat $SC_CLIENT_INSTALL_DIR/Core/config/client.properties
         
       - name: Run SAST Client Update
         run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" update
@@ -70,20 +67,6 @@ jobs:
         if: true
         run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -upload -application "REACT" -version "Feelio" -uptoken ${{secrets.SSC_TOKEN}} -pool "aea9e0ec-6b85-485b-a855-4d0260267e85" -block --output-file "sast.fpr" -log "sast.log" -pi 10
         # run: scancentral -url "https://equal-rabbit-novel.ngrok-free.app/scancentral-ctrl" start -block --output-file "sast.fpr" -log "sast.log" -diag "debug.log" -pi 10
-
-      # - name: FCLI Login to SSC
-      #   run: fcli ssc session login --url ${{vars.SSC_URL}} -t ${{secrets.SSC_TOKEN}}
-
-      # - name: FCLI Upload Result to SSC
-      #   run: fcli ssc artifact upload --session=default --av="REACT:Feelio" --file="sast.fpr" --progress="simple" --log-level=DEBUG --log-file=fcli_upload.log
-
-      # - name: FCLI Logout from SSC
-      #   run: fcli ssc session logout --session=default --no-revoke-token
-      
-      # - name: SC-SAST - Login once
-      #   uses: fortify/github-action/internal/sc-sast-login@feat-1.3.0
-      # - name: SSC - Login once
-      #   uses: fortify/github-action/internal/ssc-login@feat-1.3.0
             
       - name: Run SAST Scan using ScancentralSAST
         if: false
@@ -104,7 +87,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4.3.4
         with:
-          path: sast.log
+          path: sast.fpr
           retention-days: 1
           overwrite: true
           
