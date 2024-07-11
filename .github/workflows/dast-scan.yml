@@ -1,0 +1,46 @@
+name: Dast Scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dast-scan:
+    strategy:
+      fail-fast: false
+      # Prevent running multiple FoD scans on same release simultaneously
+      max-parallel: 1
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    env:
+      FCLI_DEFAULT_SSC_CI_TOKEN: ${{secrets.SSC_TOKEN}}
+      FCLI_DEFAULT_SSC_URL: ${{vars.SSC_URL}}
+      DAST_SCAN_NAME: "Zero_Scan-CICD_Github"
+
+    steps:
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Fortify tools
+        uses: fortify/github-action/setup@v1
+        with:
+          tool-definitions: https://github.com/fortify/tool-definitions/releases/download/v1/tool-definitions.yaml.zip
+          # export-path: true
+          fcli: latest
+
+      - name: Login to DAST using fcli
+        if: true
+        run: fcli sc-dast session login
+          
+      - name: Start DAST Scan using fcli
+        if: true
+        run: fcli sc-dast scan start -s=${{secrets.DAST_CICD_TOKEN}} -n=${{env.DAST_Scan_Name}}
+
+      - name: Logout from DAST using fcli
+        if: true
+        run: fcli sc-dast session login --no-revoke-token
+      
