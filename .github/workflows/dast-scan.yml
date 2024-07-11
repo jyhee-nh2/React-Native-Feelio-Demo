@@ -38,9 +38,9 @@ jobs:
           
       - name: Start DAST Scan using fcli
         if: true
-        run: fcli sc-dast scan start -s=${{secrets.DAST_CICD_TOKEN}} -n=${{env.DAST_Scan_Name}}
+        run: fcli sc-dast scan start -s=${{secrets.DAST_CICD_TOKEN}} -n=${{env.DAST_SCAN_NAME}}
 
       - name: Logout from DAST using fcli
         if: true
-        run: fcli sc-dast session login --no-revoke-token
+        run: fcli sc-dast session logout --no-revoke-token
       

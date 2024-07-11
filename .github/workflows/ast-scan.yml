@@ -2,8 +2,8 @@ name: SAST Scan + SCA
 
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
+  # push:
+  #   branches: [master]
 
 jobs:
   sca-scan:
