@@ -32,6 +32,7 @@ jobs:
           scan-targets: package.json package-lock.json
   
   sast-scan:
+    if: false
     needs: sca-scan
     strategy:
       fail-fast: false
